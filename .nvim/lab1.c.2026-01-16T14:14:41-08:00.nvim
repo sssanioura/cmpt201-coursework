@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+void main(){
+  printf("%s", "Please enter some text: ");
+  getline(string phrase);
+}
+

@@ -1,0 +1,26 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdlib.h>
+
+void main() {
+  // prompt user for text
+  // create lineptr, n, a stream
+  // loop till you get " "
+  // tokenize using str, delim, saveptr
+  // return tokens
+  // stop the loop when token equals return char hits tab
+
+  printf("%s", "Please enter some text: ");
+
+  char *buff = NULL;
+  char size = " ";
+
+  ssize_t num_char = getline(&buff, &size, strdin);
+  if (getline == -1) {
+    perror("getline returned error");
+    exit(EXIT_STATUS);
+  }
+  char *saveptr;
+  char *ret = strtok_r(buff, " ", % saveptr);
+  return ret;
+  free(buff);
+}
