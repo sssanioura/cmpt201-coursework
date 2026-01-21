@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+void main(){
+  printf("Enter programs to run. \n");
+  //recieve user input
+  user_input = getLine();
+  execl();
+
+
+
+  ///print on screen
+  //tokenize 
+  //
+  //execl program
+  //fork a new process for execl
+  //wait using waitpid
+  //run file / open file
+}
