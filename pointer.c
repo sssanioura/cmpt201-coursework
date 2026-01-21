@@ -106,16 +106,14 @@ INTEGER CODING RULES:
  *   Binary integer operators: &, &&, |, ||, <, >, <<, >>, ==, !=, ^, /, %
  *   Unary integer operators: ~, -
  */
-int doubleSize() {
-  double doubArray[10];
-  double *doubPtr1;
-  double *doubPtr2;
-  // Write code to compute size of a double.
-  doubPtr1 = &doubArray;
-  int size = (doubPtr1 - doubPtr2)*8;
-  return size;
-}
+int intSize() {
+  int intArray[10];
+  int *intPtr1;
+  int *intPtr2;
+  // Write code to compute size of an integer.
 
+  return 2;
+}
 
 /*
  * Return the size of a double in bytes.
