@@ -20,11 +20,11 @@ char *list_5(struct word *word, char *curr) {
 char *history(char *p) { return 0; }
 
 int main() {
-  //
+  // 
   char *buffer = NULL;
   int len = 0;
   printf("Enter input: ");
-
+  
   input = getline(&buffer, &len, stdin);
   // pointer at input
   // declare array list from list
