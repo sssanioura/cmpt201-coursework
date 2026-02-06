@@ -1,0 +1,70 @@
+#include <errno.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#define BLOCK_SIZE 128
+#define BUF_SIZE 1024
+
+void handle_error(int error_code);
+void *sbrk(intptr_t increment);
+
+struct header {
+  uint64_t size;
+  struct header *next;
+};
+
+void initialize_first_block(struct header *block) {
+  block->next = NULL;
+  block->size = BLOCK_SIZE;
+}
+
+void initialize_second_block(struct header *first_block,
+                             struct header *second_block) {
+  second_block->next = first_block->next;
+  second_block->size = BLOCK_SIZE;
+}
+
+void print_out(char *format, void *data, size_t data_size) {
+
+  char buf[BUF_SIZE];
+  ssize_t len = snprintf(buf, BUF_SIZE, format,
+                         data_size == sizeof(uint64_t) ? *(uint64_t *)data
+                                                       : *(void **)data);
+
+  write(STDOUT_FILENO, buf, len);
+}
+
+int main(void) {
+
+  char *start_addr = sbrk(0);
+
+  // if (start_addr =){
+  // perror(" ");
+  //}
+
+  struct header *first_block = (struct header *)start_addr;
+  struct header *second_block = (struct header *)(start_addr + BLOCK_SIZE);
+
+  initialize_first_block(first_block);
+  initialize_second_block(first_block, second_block);
+
+  print_out("First block starting address : %p\n", &first_block,
+            sizeof(&first_block));
+  print_out("Second block starting address : %p\n", &second_block,
+            sizeof(&second_block));
+  print_out("First block size : %p\n", &first_block->size,
+            sizeof(&first_block->size));
+  print_out("First block next : %p\n", &first_block->next,
+            sizeof(&first_block->next));
+  print_out("Second block size : %p\n", &second_block->size,
+            sizeof(&second_block->size));
+  print_out("Second block next : %p\n", &second_block->next,
+            sizeof(&second_block->next));
+  print_out("Bytes from first block : %p\n", (char *)(first_block),
+            sizeof((char *)(first_block)));
+  print_out("Bytes from second block : ", (char *)(first_block),
+            sizeof((char *)(first_block)));
+}
